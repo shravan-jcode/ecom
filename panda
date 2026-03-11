@@ -25,3 +25,5 @@ summary = data.groupby("department_name")["employee_salary"].mean()
 
 print("\nAverage Salary Per Department:")
 print(summary)
+
+pip install scikit-learn pandas numpy
