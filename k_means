@@ -1,0 +1,20 @@
+# AIM: Implement K-Means clustering to group customers based on purchasing behaviour
+
+# pip install pandas
+# pip install scikit-learn
+
+import pandas as pd
+from sklearn.cluster import KMeans
+
+# Step 1: Load dataset
+data = pd.read_csv("customers.csv")
+
+# Step 2: Select numeric features (purchase related columns)
+X = data.select_dtypes(include=['int64','float64'])
+
+# Step 3: Apply K-Means
+kmeans = KMeans(n_clusters=3)
+data['Cluster'] = kmeans.fit_predict(X)
+
+# Step 4: Show result
+print(data.head())

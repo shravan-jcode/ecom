@@ -1,0 +1,32 @@
+# AIM: Build a Decision Tree Classifier to predict customer churn
+
+# pip install pandas
+# pip install scikit-learn
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# Step 1: Load dataset
+data = pd.read_csv("customer_churn.csv")
+
+# Step 2: Convert text values to numbers
+data["Churn"] = data["Churn"].map({"Yes":1, "No":0})
+
+# Step 3: Select input and output
+X = data.drop("Churn", axis=1)
+y = data["Churn"]
+
+# Step 4: Split dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Step 5: Train Decision Tree
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+
+# Step 6: Prediction
+pred = model.predict(X_test)
+
+# Step 7: Accuracy
+print("Accuracy:", accuracy_score(y_test, pred))
