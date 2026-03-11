@@ -1,0 +1,27 @@
+import pandas as pd
+
+# Load datasets
+employees = pd.read_csv("employee_data.csv")
+departments = pd.read_csv("department_data.csv")
+
+# Merge datasets using department_id
+data = pd.merge(employees, departments, on="department_id", how="left")
+
+# Handle missing values
+data["location"] = data["location"].fillna("Not Available")
+
+# Convert hire_date to datetime
+data["hire_date"] = pd.to_datetime(data["hire_date"])
+
+# Rename column for clarity
+data.rename(columns={"salary": "employee_salary"}, inplace=True)
+
+# Show merged data
+print("Merged Employee Data:")
+print(data)
+
+# Aggregate: average salary per department
+summary = data.groupby("department_name")["employee_salary"].mean()
+
+print("\nAverage Salary Per Department:")
+print(summary)
