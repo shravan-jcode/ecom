@@ -1,27 +1,31 @@
 import pandas as pd
 
-# Load datasets
-employees = pd.read_csv("employee_data.csv")
-departments = pd.read_csv("department_data.csv")
+sales = pd.read_csv("sales.csv")
+customers = pd.read_csv("customer.csv")
 
 # Merge datasets using department_id
-data = pd.merge(employees, departments, on="department_id", how="left")
+data = pd.merge(sales, customers, on="customer_id", how="left")
 
-# Handle missing values
-data["location"] = data["location"].fillna("Not Available")
+# Handle missing values (if any)
+data["email"] = data["email"].fillna("Not Available")
 
-# Convert hire_date to datetime
-data["hire_date"] = pd.to_datetime(data["hire_date"])
+# Show datatype before conversion
+print("Date datatype BEFORE conversion:", data["date"].dtype)
 
-# Rename column for clarity
-data.rename(columns={"salary": "employee_salary"}, inplace=True)
+data["date"] = pd.to_datetime(data["date"])
+
+# Show datatype after conversion
+print("Date datatype AFTER conversion:", data["date"].dtype)
+
+# Rename column
+data.rename(columns={"total_price": "sales_amount"}, inplace=True)
 
 # Show merged data
-print("Merged Employee Data:")
+print("\nMerged Data")
 print(data)
 
-# Aggregate: average salary per department
-summary = data.groupby("department_name")["employee_salary"].mean()
+# Aggregate: Average salary per department
+summary = data.groupby("name")["sales_amount"].sum()
 
-print("\nAverage Salary Per Department:")
+print("\nTotal Sales Per Customer:")
 print(summary)
