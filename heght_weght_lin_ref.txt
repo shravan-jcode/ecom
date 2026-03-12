@@ -1,0 +1,34 @@
+# Install required packages (run these commands in terminal before running code)
+# pip install scikit-learn
+# pip install matplotlib
+# pip install numpy
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# Height data (Independent variable)
+height = np.array([151,174,138,186,128,136,179,163,152]).reshape(-1,1)
+
+# Weight data (Dependent variable)
+weight = np.array([63,81,56,91,47,57,76,72,62])
+
+# Create Linear Regression model
+model = LinearRegression()
+
+# Train the model
+model.fit(height, weight)
+
+# Predict weight for a new height
+value = float(input("Enter height: "))
+prediction = model.predict([[value]])
+
+print("Predicted Weight:", round(prediction[0],2))
+
+# Plot graph
+plt.scatter(height, weight)
+plt.plot(height, model.predict(height))
+plt.xlabel("Height")
+plt.ylabel("Weight")
+plt.title("Linear Regression: Height vs Weight")
+plt.show()

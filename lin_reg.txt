@@ -1,0 +1,39 @@
+# Install required packages (run these commands in terminal before running code)
+# pip install pandas
+# pip install scikit-learn
+# pip install matplotlib
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Read dataset
+data = pd.read_csv("employee.csv")
+
+# Input (Independent variable)
+X = data[["YearsExperience"]]
+
+# Output (Dependent variable)
+y = data["Salary"]
+
+# Create Linear Regression model
+model = LinearRegression()
+
+# Train the model
+model.fit(X, y)
+
+# Take value from user
+value = float(input("Enter Years of Experience: "))
+
+# Predict salary for the entered value
+prediction = model.predict([[value]])
+
+print("Predicted Salary for", value, "years experience:", round(prediction[0], 2))
+
+# Plot graph
+plt.scatter(X, y)
+plt.plot(X, model.predict(X))
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.title("Linear Regression: Experience vs Salary")
+plt.show()

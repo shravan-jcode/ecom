@@ -1,0 +1,23 @@
+import pandas as pd
+
+# Read CSV file
+cars = pd.read_csv("cars.csv")
+
+# Display dataset
+print("Original Data:")
+print(cars)
+
+# 1. Display cars having Buy Price >= 3000
+print("\nCars with Buy Price >= 3000:")
+filtered = cars[cars["Buy Price"] >= 3000]
+print(filtered)
+
+# 2. Sort the car data in ascending order
+print("\nSorted Data (Ascending):")
+sorted_cars = cars.sort_values(by="Buy Price")
+print(sorted_cars)
+
+# 3. Group data according to Model
+print("\nGrouped by Model:")
+grouped = cars.groupby("Model")
+print(grouped.size())

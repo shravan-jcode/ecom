@@ -1,0 +1,16 @@
+# Install required package
+# pip install pandas
+
+import pandas as pd
+
+# Read dataset
+data = pd.read_csv("data.csv")
+
+print("Original Data:")
+print(data)
+
+# Convert categorical columns to numerical (Feature Dummification)
+data_dummies = pd.get_dummies(data)
+
+print("\nData After Feature Dummification:")
+print(data_dummies)

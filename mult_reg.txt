@@ -1,0 +1,27 @@
+# Install required packages (run these commands in terminal before running code)
+# pip install pandas
+# pip install scikit-learn
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Load dataset
+data = pd.read_csv("pima.csv")
+
+# Multiple input variables (Independent variables)
+X = data[["Pregnancies","BloodPressure","BMI","Age"]]
+
+# Output variable (Dependent variable)
+y = data["Glucose"]
+
+# Create Multiple Linear Regression model
+model = LinearRegression()
+
+# Train the model using dataset
+model.fit(X, y)
+
+# Predict glucose value for a new patient
+# Example input: Pregnancies=2, BloodPressure=70, BMI=30.5, Age=25
+prediction = model.predict([[2,70,30.5,25]])
+
+print("Predicted Glucose:", round(prediction[0],2))
